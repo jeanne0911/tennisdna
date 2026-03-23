@@ -1,5 +1,24 @@
 # 网球DNA测试 - 部署指南
 
+## 🚀 快速开始
+
+### 部署到生产服务器
+
+**目标服务器**: 150.158.141.205:8080
+
+**推荐部署方式**：
+
+1. **自动部署（最简单）**：在本地运行 `deploy_to_server.sh`
+2. **服务器快速部署**：在服务器上运行 `QUICK_DEPLOY.sh`
+3. **完全手动部署**：参考 `SERVER_DEPLOYMENT_GUIDE.md`
+
+**部署文档**：
+- 📋 [部署检查清单](./DEPLOYMENT_CHECKLIST.md) - 部署前的检查和验证
+- 📖 [完整部署指南](./SERVER_DEPLOYMENT_GUIDE.md) - 详细的部署步骤
+- ✅ [部署配置总结](./DEPLOYMENT_SUMMARY.md) - 云数据库配置说明
+
+---
+
 ## 项目概述
 这是一个基于FastAPI的H5网页应用，提供网球风格测试功能。
 
