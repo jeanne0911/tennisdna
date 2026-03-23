@@ -1,6 +1,6 @@
 // ========== 核心应用逻辑 ==========
 import { questions, resultTypes, matchTable, typePriority } from './data.js';
-import { showShareModal } from './share.js';
+import { showShareModal, generateShareCard } from './share.js';
 
 // 全局状态
 const state = {
