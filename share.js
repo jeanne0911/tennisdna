@@ -676,8 +676,8 @@ export function generateShareCard(result, mainType, subType, typeScores) {
   ctx.fillText('©️ 一起趣玩', W / 2, bottomY + 174);
 
   // ---- 加载图片并下载 ----
-  const xhsLogoUrl = 'red.png';
-  const qrCodeUrl = 'http___150.158.141.205_8080.png';
+  const xhsLogoUrl = '/static/red.png';
+  const qrCodeUrl = '/static/http___150.158.141.205_8080.png';
 
   const drawAllAndDownload = (starImgEl, xhsLogoEl, qrImgEl) => {
     if (starImgEl) {
