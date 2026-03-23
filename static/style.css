@@ -1,0 +1,513 @@
+/* ========== 全局动画与自定义样式 ========== */
+
+/* 网球弹跳加载动画 */
+.tennis-ball-loader .ball {
+  width: 48px;
+  height: 48px;
+  background: radial-gradient(circle at 35% 35%, #e8f748, #c8e64c, #a0c030);
+  border-radius: 50%;
+  margin: 0 auto;
+  position: relative;
+  animation: bounce-ball 0.8s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(200, 230, 76, 0.4);
+}
+
+.tennis-ball-loader .ball::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 4px;
+  right: 4px;
+  height: 30px;
+  border: 2px solid rgba(255,255,255,0.5);
+  border-radius: 50%;
+  transform: rotate(-30deg);
+}
+
+@keyframes bounce-ball {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30px); }
+}
+
+/* 飘浮网球 */
+.floating-balls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 67vh;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.float-ball {
+  position: absolute;
+  top: -40px;
+  left: var(--x);
+  font-size: var(--size);
+  animation: float-down 6s ease-in-out infinite;
+  animation-delay: var(--delay);
+  opacity: 0.3;
+}
+
+/* 纯网球球形样式（无拍子） */
+.tennis-ball-icon {
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #e8f748, #c8e64c, #a0c030);
+  position: absolute;
+  box-shadow: 0 0 8px rgba(200, 230, 76, 0.3);
+  overflow: hidden;
+}
+
+.tennis-ball-icon::before {
+  content: '';
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  right: 5%;
+  bottom: 15%;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  transform: rotate(-30deg);
+}
+
+@keyframes float-down {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.3; }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(67vh) rotate(360deg); opacity: 0; }
+}
+
+/* 球场纹理 */
+.court-pattern {
+  background-image: 
+    linear-gradient(rgba(200,230,76,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,230,76,0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* 页面切换动画 */
+.page {
+  animation: page-in 0.4s ease-out;
+}
+
+@keyframes page-in {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.page-out {
+  animation: page-out 0.3s ease-in forwards;
+}
+
+@keyframes page-out {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-30px); }
+}
+
+/* 选项选中状态 */
+.info-option.selected {
+  border-color: #c8e64c !important;
+  background: rgba(200, 230, 76, 0.1) !important;
+  box-shadow: 0 0 0 1px rgba(200, 230, 76, 0.3), 0 4px 12px rgba(200, 230, 76, 0.1);
+}
+
+.info-option {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.info-option:active {
+  transform: scale(0.97);
+}
+
+/* 测试题选项 */
+.test-option {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: all 0.2s ease;
+}
+
+@media (hover: hover) {
+  .test-option:hover {
+    border-color: rgba(200, 230, 76, 0.3);
+    background: rgba(200, 230, 76, 0.05);
+  }
+}
+
+.test-option:active {
+  transform: scale(0.98);
+}
+
+.test-option.selected-answer {
+  border-color: #c8e64c;
+  background: rgba(200, 230, 76, 0.15);
+  box-shadow: 0 0 0 1px rgba(200, 230, 76, 0.3);
+}
+
+/* 题目切换动画 */
+.question-enter {
+  animation: q-enter 0.35s ease-out;
+}
+
+@keyframes q-enter {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* DNA分析动画 */
+.analyzing-animation {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.dna-helix {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  animation: dna-spin 3s linear infinite;
+}
+
+.dna-strand {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.dna-strand:first-child {
+  border-top-color: #c8e64c;
+  border-right-color: #c8e64c;
+  animation: dna-rotate-1 1.5s linear infinite;
+}
+
+.dna-strand:last-child {
+  width: 60px;
+  height: 60px;
+  border-bottom-color: #4ade80;
+  border-left-color: #4ade80;
+  animation: dna-rotate-2 1.5s linear infinite;
+}
+
+@keyframes dna-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes dna-rotate-1 {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes dna-rotate-2 {
+  to { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+
+/* 结果页面样式 */
+.result-hero {
+  position: relative;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.result-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center top, rgba(200,230,76,0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.result-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, rgba(200,230,76,0.2), rgba(74,222,128,0.15));
+  border: 1px solid rgba(200,230,76,0.3);
+  font-size: 14px;
+  font-weight: 700;
+  color: #c8e64c;
+}
+
+.match-card {
+  background: linear-gradient(135deg, rgba(200,230,76,0.1), rgba(18,31,56,0.8));
+  border: 1px solid rgba(200,230,76,0.15);
+  border-radius: 16px;
+  padding: 16px;
+  transition: all 0.2s;
+}
+
+.match-card:hover {
+  border-color: rgba(200,230,76,0.3);
+}
+
+/* 分享按钮 */
+.share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.share-btn:active {
+  transform: scale(0.97);
+}
+
+/* 匹配度环形 */
+.match-ring {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 14px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.match-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.1);
+}
+
+.match-ring::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid #c8e64c;
+  clip-path: polygon(0 0, 100% 0, 100% var(--pct), 0 var(--pct));
+}
+
+/* Toast提示 */
+.toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  background: rgba(200,230,76,0.95);
+  color: #1a2a10;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 100;
+  transition: transform 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Feature card 入场动画 */
+.feature-card {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: feature-in 0.5s ease-out forwards;
+}
+
+.feature-card:nth-child(1) { animation-delay: 0.1s; }
+.feature-card:nth-child(2) { animation-delay: 0.2s; }
+.feature-card:nth-child(3) { animation-delay: 0.3s; }
+.feature-card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes feature-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 结果页面各部分入场动画 */
+.result-section {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: result-in 0.6s ease-out forwards;
+}
+
+@keyframes result-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 进度条动画 */
+.progress-bar {
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 移动端适配 */
+@media (max-width: 375px) {
+  .result-hero h2 { font-size: 1.5rem; }
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(200,230,76,0.2);
+  border-radius: 3px;
+}
+
+/* 禁止选中（H5体验优化） */
+* {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* 分享卡片画布样式（隐藏） */
+#share-canvas {
+  position: fixed;
+  left: -9999px;
+  top: -9999px;
+}
+
+/* 弹窗遮罩 */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(4px);
+  animation: fade-in 0.3s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background: #121f38;
+  border: 1px solid rgba(200,230,76,0.2);
+  border-radius: 20px;
+  padding: 24px;
+  max-width: 340px;
+  width: 100%;
+  animation: modal-in 0.3s ease-out;
+}
+
+@keyframes modal-in {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* 波纹点击效果 */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: radial-gradient(circle, rgba(200,230,76,0.3) 10%, transparent 70%);
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.3s;
+}
+
+.ripple:active::after {
+  transform: scale(2);
+  opacity: 1;
+  transition: 0s;
+}
+
+/* 球星照片样式 */
+.star-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid rgba(255,255,255,0.1);
+}
+
+.star-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 首页类型预览卡片 */
+.type-teaser-card {
+  transition: all 0.25s ease;
+  cursor: default;
+}
+
+.type-teaser-card:hover {
+  border-color: rgba(200,230,76,0.25);
+  background: rgba(200,230,76,0.06);
+  transform: translateY(-2px);
+}
+
+/* 首页亮点条目入场动画 */
+.highlight-item {
+  opacity: 0;
+  transform: translateX(-16px);
+  animation: highlight-in 0.5s ease-out forwards;
+}
+
+.highlight-item:nth-child(1) { animation-delay: 0.15s; }
+.highlight-item:nth-child(2) { animation-delay: 0.28s; }
+.highlight-item:nth-child(3) { animation-delay: 0.41s; }
+
+@keyframes highlight-in {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* 类型预览卡片入场动画 */
+.type-teaser-card {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: teaser-in 0.4s ease-out forwards;
+}
+
+.type-teaser-card:nth-child(1) { animation-delay: 0.05s; }
+.type-teaser-card:nth-child(2) { animation-delay: 0.12s; }
+.type-teaser-card:nth-child(3) { animation-delay: 0.19s; }
+.type-teaser-card:nth-child(4) { animation-delay: 0.26s; }
+
+@keyframes teaser-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* iOS 安全区域适配 - 防止底部被地址栏遮挡 */
+#app {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+footer {
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 32px) !important;
+  margin-bottom: 0;
+}

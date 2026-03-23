@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Tennis DNA Test - 网球DNA测试</title>
+  <meta name="description" content="测测你的网球DNA，找到最配的球场搭档！">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.1.0/remixicon.min.css">
+  <!-- ECharts 雷达图 -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <!-- QRCode 二维码生成 -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            tennis: {
+              green: '#c8e64c',
+              dark: '#2d5016',
+              court: '#2e7d32',
+              clay: '#d4713b',
+              line: '#ffffff',
+              bg: '#0a1628',
+              card: '#121f38',
+              accent: '#4ade80',
+            }
+          },
+          fontFamily: {
+            sans: ['Noto Sans SC', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-sans bg-tennis-bg text-white min-h-screen overflow-x-hidden">
+  <!-- 加载屏幕 -->
+  <div id="loading-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-tennis-bg">
+    <div class="text-center">
+      <div class="tennis-ball-loader mb-6">
+        <div class="ball"></div>
+      </div>
+      <p class="text-tennis-green text-lg font-medium animate-pulse">加载中...</p>
+    </div>
+  </div>
+
+  <!-- 主容器 -->
+  <div id="app" class="max-w-lg mx-auto min-h-screen relative" style="display:none;">
+
+    <!-- ========== 开始页面 ========== -->
+    <section id="page-start" class="page active min-h-screen flex flex-col">
+      <!-- 顶部英雄区 -->
+      <div class="relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-tennis-green/20 via-tennis-green/5 to-transparent"></div>
+        <div class="court-pattern absolute inset-0 opacity-10"></div>
+        
+        <!-- 飘浮网球动画 -->
+        <div class="floating-balls">
+          <span class="float-ball tennis-ball-icon" style="--delay:0s;--x:10%;--size:24px;"></span>
+          <span class="float-ball tennis-ball-icon" style="--delay:1.2s;--x:80%;--size:18px;"></span>
+          <span class="float-ball tennis-ball-icon" style="--delay:2.5s;--x:45%;--size:30px;"></span>
+          <span class="float-ball tennis-ball-icon" style="--delay:0.8s;--x:65%;--size:20px;"></span>
+          <span class="float-ball tennis-ball-icon" style="--delay:3s;--x:25%;--size:16px;"></span>
+        </div>
+
+        <div class="relative z-10 pt-14 pb-6 px-6 text-center">
+          <!-- LOGO 徽章 -->
+          <div class="mb-5 relative inline-block">
+            <div class="w-24 h-24 rounded-full bg-gradient-to-br from-tennis-green to-green-400 shadow-lg shadow-tennis-green/40 flex items-center justify-center">
+              <span class="text-5xl">🎾</span>
+            </div>
+            <!-- 光晕 -->
+            <div class="absolute inset-0 rounded-full bg-tennis-green/20 blur-xl scale-150 -z-10"></div>
+          </div>
+
+          <!-- 主标题 -->
+          <h1 class="text-4xl font-black mb-1 bg-gradient-to-r from-tennis-green via-green-300 to-emerald-400 bg-clip-text text-transparent leading-tight" style="font-family:'Fredoka One',cursive;">
+            Tennis DNA Test
+          </h1>
+
+          <!-- 副标题标签已移除 -->
+        </div>
+      </div>
+
+      <!-- 测试亮点 -->
+      <div class="px-5 py-4">
+        <div class="flex flex-col gap-6">
+          <!-- 特性1 -->
+          <div class="flex flex-col items-center text-center gap-3">
+            <div class="relative">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-tennis-green/40 to-tennis-green/10 flex items-center justify-center">
+                <span class="text-3xl">🧬</span>
+              </div>
+              <div class="absolute inset-0 rounded-full bg-tennis-green/20 blur-xl scale-150 -z-10"></div>
+            </div>
+            <div>
+              <div class="text-base font-bold text-white leading-tight">解码网球DNA</div>
+              <div class="text-sm text-gray-400 mt-1 leading-snug">8道题精准分析你的打球风格</div>
+            </div>
+          </div>
+
+          <!-- 分隔线 -->
+          <div class="w-px h-6 bg-white/10 mx-auto"></div>
+
+          <!-- 特性2 -->
+          <div class="flex flex-col items-center text-center gap-3">
+            <div class="relative">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-400/40 to-blue-400/10 flex items-center justify-center">
+                <span class="text-3xl">🤝</span>
+              </div>
+              <div class="absolute inset-0 rounded-full bg-blue-400/20 blur-xl scale-150 -z-10"></div>
+            </div>
+            <div>
+              <div class="text-base font-bold text-white leading-tight">找到最配球友</div>
+              <div class="text-sm text-gray-400 mt-1 leading-snug">智能匹配最适合你的搭子类型</div>
+            </div>
+          </div>
+
+          <!-- 分隔线 -->
+          <div class="w-px h-6 bg-white/10 mx-auto"></div>
+
+          <!-- 特性3 -->
+          <div class="flex flex-col items-center text-center gap-3">
+            <div class="relative">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-400/40 to-purple-400/10 flex items-center justify-center">
+                <span class="text-3xl">📤</span>
+              </div>
+              <div class="absolute inset-0 rounded-full bg-purple-400/20 blur-xl scale-150 -z-10"></div>
+            </div>
+            <div>
+              <div class="text-base font-bold text-white leading-tight">一键分享结果</div>
+              <div class="text-sm text-gray-400 mt-1 leading-snug">生成专属卡片，邀请球友一起测</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 开始按钮 -->
+      <div class="px-5 pt-4 pb-20 mt-auto">
+        <button id="btn-start" class="w-full py-4 rounded-2xl bg-gradient-to-r from-tennis-green to-green-400 text-tennis-dark font-black text-lg shadow-lg shadow-tennis-green/30 active:scale-95 transition-transform ripple">
+          <i class="ri-play-fill mr-1"></i> 开始测试
+        </button>
+        <p class="text-center text-xs text-gray-500 mt-3">已有 <span id="test-count-number" class="text-tennis-green font-bold">99</span> 人完成测试</p>
+      </div>
+    </section>
+
+    <!-- ========== 基本信息页面 ========== -->
+    <section id="page-info" class="page min-h-screen flex flex-col" style="display:none;">
+      <div class="sticky top-0 z-20 bg-tennis-bg/90 backdrop-blur-lg px-5 pt-5 pb-3">
+        <div class="flex items-center justify-between mb-3">
+          <button class="btn-back text-gray-400 hover:text-white transition-colors">
+            <i class="ri-arrow-left-line text-xl"></i>
+          </button>
+          <span class="text-xs text-gray-500">基本信息</span>
+          <span class="w-6"></span>
+        </div>
+        <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+          <div class="progress-bar h-full bg-gradient-to-r from-tennis-green to-green-400 rounded-full transition-all duration-500" style="width:5%"></div>
+        </div>
+      </div>
+
+      <div class="flex-1 px-5 py-4">
+        <h2 class="text-2xl font-black mb-1">🏸 基本信息</h2>
+        <p class="text-sm text-gray-400 mb-6">先让我们了解一下你的网球背景</p>
+
+        <!-- 技术水平 -->
+        <div class="info-question mb-6">
+          <label class="block text-sm font-bold text-green-300 mb-3">
+            <i class="ri-bar-chart-line mr-1"></i> 技术水平（NTRP）
+          </label>
+          <div class="space-y-2.5" id="q-level">
+            <button data-field="level" data-value="0" class="info-option w-full flex items-center gap-3 p-3.5 rounded-xl bg-tennis-card border border-white/5 transition-all hover:border-tennis-green/50">
+              <span class="w-10 h-10 rounded-lg bg-blue-500/15 flex items-center justify-center text-sm font-bold text-blue-400">2.0</span>
+              <div class="text-left"><div class="text-sm font-bold">NTRP 2.0-2.5</div><div class="text-xs text-gray-500">初学者</div></div>
+            </button>
+            <button data-field="level" data-value="1" class="info-option w-full flex items-center gap-3 p-3.5 rounded-xl bg-tennis-card border border-white/5 transition-all hover:border-tennis-green/50">
+              <span class="w-10 h-10 rounded-lg bg-green-500/15 flex items-center justify-center text-sm font-bold text-green-400">3.0</span>
+              <div class="text-left"><div class="text-sm font-bold">NTRP 3.0-3.5</div><div class="text-xs text-gray-500">业余中级</div></div>
+            </button>
+            <button data-field="level" data-value="2" class="info-option w-full flex items-center gap-3 p-3.5 rounded-xl bg-tennis-card border border-white/5 transition-all hover:border-tennis-green/50">
+              <span class="w-10 h-10 rounded-lg bg-yellow-500/15 flex items-center justify-center text-sm font-bold text-yellow-400">4.0</span>
+              <div class="text-left"><div class="text-sm font-bold">NTRP 4.0-4.5</div><div class="text-xs text-gray-500">业余高级</div></div>
+            </button>
+            <button data-field="level" data-value="3" class="info-option w-full flex items-center gap-3 p-3.5 rounded-xl bg-tennis-card border border-white/5 transition-all hover:border-tennis-green/50">
+              <span class="w-10 h-10 rounded-lg bg-red-500/15 flex items-center justify-center text-sm font-bold text-red-400">5.0</span>
+              <div class="text-left"><div class="text-sm font-bold">NTRP 5.0+</div><div class="text-xs text-gray-500">准专业</div></div>
+            </button>
+          </div>
+        </div>
+
+        <!-- 打球频率 -->
+        <div class="info-question mb-6">
+          <label class="block text-sm font-bold text-green-300 mb-3">
+            <i class="ri-calendar-line mr-1"></i> 打球频率
+          </label>
+          <div class="grid grid-cols-3 gap-3" id="q-freq">
+            <button data-field="freq" data-value="0" class="info-option p-4 rounded-xl bg-tennis-card border border-white/5 text-center transition-all hover:border-tennis-green/50">
+              <div class="text-2xl mb-1">😊</div>
+              <div class="text-xs font-bold">偶尔</div>
+              <div class="text-[10px] text-gray-500">每周1-2次</div>
+            </button>
+            <button data-field="freq" data-value="1" class="info-option p-4 rounded-xl bg-tennis-card border border-white/5 text-center transition-all hover:border-tennis-green/50">
+              <div class="text-2xl mb-1">💪</div>
+              <div class="text-xs font-bold">经常</div>
+              <div class="text-[10px] text-gray-500">每周3-5次</div>
+            </button>
+            <button data-field="freq" data-value="2" class="info-option p-4 rounded-xl bg-tennis-card border border-white/5 text-center transition-all hover:border-tennis-green/50">
+              <div class="text-2xl mb-1">🔥</div>
+              <div class="text-xs font-bold">狂热</div>
+              <div class="text-[10px] text-gray-500">每周5次+</div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-5 pb-20">
+        <button id="btn-info-next" class="w-full py-4 rounded-2xl bg-gradient-to-r from-gray-700 to-gray-600 text-gray-400 font-bold text-base cursor-not-allowed transition-all" disabled>
+          请完成以上选择
+        </button>
+      </div>
+    </section>
+
+    <!-- ========== 风格测试页面 ========== -->
+    <section id="page-test" class="page min-h-screen flex flex-col" style="display:none;">
+      <div class="sticky top-0 z-20 bg-tennis-bg/90 backdrop-blur-lg px-5 pt-5 pb-3">
+        <div class="flex items-center justify-between mb-3">
+          <button class="btn-back text-gray-400 hover:text-white transition-colors">
+            <i class="ri-arrow-left-line text-xl"></i>
+          </button>
+          <span id="test-counter" class="text-xs text-gray-500">第1题 / 共8题</span>
+          <span class="w-6"></span>
+        </div>
+        <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+          <div id="test-progress" class="progress-bar h-full bg-gradient-to-r from-tennis-green to-green-400 rounded-full transition-all duration-500" style="width:10%"></div>
+        </div>
+      </div>
+
+      <div class="flex-1 px-5 py-6 flex flex-col">
+        <div id="question-container" class="flex-1">
+          <!-- 动态填充题目 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 分析中页面 ========== -->
+    <section id="page-analyzing" class="page min-h-screen flex flex-col items-center justify-center" style="display:none;">
+      <div class="text-center px-8">
+        <div class="analyzing-animation mb-8">
+          <div class="dna-helix">
+            <div class="dna-strand"></div>
+            <div class="dna-strand"></div>
+          </div>
+        </div>
+        <h2 class="text-2xl font-black mb-3 text-tennis-green">正在解码你的网球DNA</h2>
+        <p id="analyzing-text" class="text-sm text-gray-400 transition-opacity">分析你的击球风格...</p>
+        <div class="mt-8 w-48 h-1 bg-white/5 rounded-full mx-auto overflow-hidden">
+          <div id="analyze-bar" class="h-full bg-gradient-to-r from-tennis-green to-green-400 rounded-full transition-all duration-1000" style="width:0%"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 结果页面 ========== -->
+    <section id="page-result" class="page min-h-screen" style="display:none;">
+      <div id="result-container">
+        <!-- 动态填充结果 -->
+      </div>
+    </section>
+  </div>
+
+  <!-- 页脚 -->
+  <footer class="text-center py-2 text-xs text-gray-600">
+    <p class="mb-1" style="color:#c8e64c;font-weight:700;">©️ 一起趣玩</p>
+    <p>由 <a href="https://with.woa.com/" style="color: #8A2BE2;" target="_blank">With</a> 通过自然语言生成</p>
+  </footer>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
