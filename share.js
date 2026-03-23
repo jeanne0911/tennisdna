@@ -193,7 +193,7 @@ export function showShareModal(result, mainType, subType, typeScores) {
           <div style="color:#c8e64c;font-size:14px;font-weight:700;margin-bottom:8px;">🎾 扫码测测你的网球DNA</div>
           <div style="color:#9ca3af;font-size:11px;margin-bottom:6px;">更多有趣活动，请关注</div>
           <div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
-            <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/18d39dea-2b83-4e8c-8020-7b643328c9f2/red.png" style="width:16px;height:16px;border-radius:3px;flex-shrink:0;" alt="小红书">
+            <img src="red.png" style="width:16px;height:16px;border-radius:3px;flex-shrink:0;" alt="小红书">
             <span style="color:#e5e7eb;font-size:12px;font-weight:600;">小红书：一起趣玩</span>
           </div>
           <div style="display:flex;align-items:center;gap:5px;">
@@ -211,7 +211,7 @@ export function showShareModal(result, mainType, subType, typeScores) {
             display:flex;align-items:center;justify-content:center;
             overflow:hidden;
           ">
-            <img src="https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/65f3a9e8-f6c3-4477-9bda-8aa88a9d5c11/http___150.158.141.205_8080.png" style="width:84px;height:84px;display:block;" alt="二维码">
+            <img src="http___150.158.141.205_8080.png" style="width:84px;height:84px;display:block;" alt="二维码">
           </div>
         </div>
       </div>
@@ -676,8 +676,8 @@ export function generateShareCard(result, mainType, subType, typeScores) {
   ctx.fillText('©️ 一起趣玩', W / 2, bottomY + 174);
 
   // ---- 加载图片并下载 ----
-  const xhsLogoUrl = 'https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/18d39dea-2b83-4e8c-8020-7b643328c9f2/red.png';
-  const qrCodeUrl = 'https://zhiyan-ai-agent-with-1258344702.cos.ap-guangzhou.tencentcos.cn/with/65f3a9e8-f6c3-4477-9bda-8aa88a9d5c11/http___150.158.141.205_8080.png';
+  const xhsLogoUrl = 'red.png';
+  const qrCodeUrl = 'http___150.158.141.205_8080.png';
 
   const drawAllAndDownload = (starImgEl, xhsLogoEl, qrImgEl) => {
     if (starImgEl) {
