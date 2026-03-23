@@ -7,6 +7,7 @@ import pymysql
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 from dotenv import load_dotenv
@@ -15,6 +16,15 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = FastAPI(title="Tennis DNA Test API")
+
+# CORS 配置 - 允许静态资源的跨域加载
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 允许所有来源
+    allow_credentials=True,
+    allow_methods=["*"],  # 允许所有方法
+    allow_headers=["*"],  # 允许所有头部
+)
 
 # ========== 数据库配置（通过环境变量获取） ==========
 DB_CONFIG = {

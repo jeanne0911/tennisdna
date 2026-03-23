@@ -193,7 +193,7 @@ export function showShareModal(result, mainType, subType, typeScores) {
           <div style="color:#c8e64c;font-size:14px;font-weight:700;margin-bottom:8px;">🎾 扫码测测你的网球DNA</div>
           <div style="color:#9ca3af;font-size:11px;margin-bottom:6px;">更多有趣活动，请关注</div>
           <div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
-            <img src="red.png" style="width:16px;height:16px;border-radius:3px;flex-shrink:0;" alt="小红书">
+            <img src="/static/red.png" style="width:16px;height:16px;border-radius:3px;flex-shrink:0;" alt="小红书">
             <span style="color:#e5e7eb;font-size:12px;font-weight:600;">小红书：一起趣玩</span>
           </div>
           <div style="display:flex;align-items:center;gap:5px;">
@@ -211,7 +211,7 @@ export function showShareModal(result, mainType, subType, typeScores) {
             display:flex;align-items:center;justify-content:center;
             overflow:hidden;
           ">
-            <img src="http___150.158.141.205_8080.png" style="width:84px;height:84px;display:block;" alt="二维码">
+            <img src="/static/http___150.158.141.205_8080.png" style="width:84px;height:84px;display:block;" alt="二维码">
           </div>
         </div>
       </div>
@@ -409,6 +409,7 @@ function drawShareRadar(canvas, result) {
  * 生成分享卡片（Canvas）并下载
  */
 export function generateShareCard(result, mainType, subType, typeScores) {
+  console.log('开始生成分享海报...');
   const match = matchTable[mainType];
   const bestMatchType = resultTypes[match.best.id];
 
@@ -753,6 +754,7 @@ export function generateShareCard(result, mainType, subType, typeScores) {
 
   const checkAllLoaded = () => {
     loadCount++;
+    console.log(`图片加载进度: ${loadCount}/${totalLoads}`);
     if (loadCount >= totalLoads) {
       drawAllAndDownload(starImgLoaded, xhsLogoLoaded, qrImgLoaded);
     }
@@ -760,44 +762,57 @@ export function generateShareCard(result, mainType, subType, typeScores) {
 
   const img = new Image();
   img.crossOrigin = 'anonymous';
-  img.onload = () => { starImgLoaded = img; checkAllLoaded(); };
-  img.onerror = () => { checkAllLoaded(); };
-  img.src = result.starPhoto + (result.starPhoto.includes('?') ? '&' : '?') + '_t=' + Date.now();
+  img.onload = () => { console.log('球星头像加载成功:', result.starPhoto); starImgLoaded = img; checkAllLoaded(); };
+  img.onerror = () => { console.error('球星头像加载失败:', result.starPhoto); checkAllLoaded(); };
+  const starPhotoUrl = result.starPhoto;
+  img.src = starPhotoUrl + (starPhotoUrl.includes('?') ? '&' : '?') + '_t=' + Date.now();
+  console.log('开始加载球星头像:', img.src);
 
   const xhsImg = new Image();
   xhsImg.crossOrigin = 'anonymous';
-  xhsImg.onload = () => { xhsLogoLoaded = xhsImg; checkAllLoaded(); };
-  xhsImg.onerror = () => { checkAllLoaded(); };
+  xhsImg.onload = () => { console.log('小红书logo加载成功'); xhsLogoLoaded = xhsImg; checkAllLoaded(); };
+  xhsImg.onerror = () => { console.error('小红书logo加载失败'); checkAllLoaded(); };
   xhsImg.src = xhsLogoUrl + '?_t=' + Date.now();
+  console.log('开始加载小红书logo:', xhsImg.src);
 
   const qrImg = new Image();
   qrImg.crossOrigin = 'anonymous';
-  qrImg.onload = () => { qrImgLoaded = qrImg; checkAllLoaded(); };
-  qrImg.onerror = () => { checkAllLoaded(); };
+  qrImg.onload = () => { console.log('二维码加载成功'); qrImgLoaded = qrImg; checkAllLoaded(); };
+  qrImg.onerror = () => { console.error('二维码加载失败'); checkAllLoaded(); };
   qrImg.src = qrCodeUrl + '?_t=' + Date.now();
+  console.log('开始加载二维码:', qrImg.src);
 }
 
 function downloadCanvas(canvas, name) {
+  console.log('开始下载canvas...');
   // 判断是否在移动端（特别是微信）
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const isWeChat = /MicroMessenger/i.test(navigator.userAgent);
+
+  console.log('设备检测:', { isMobile, isWeChat, userAgent: navigator.userAgent });
 
   if (isMobile || isWeChat) {
     // 移动端/微信：显示图片供长按保存
     try {
       const dataURL = canvas.toDataURL('image/png');
+      console.log('生成dataURL成功，长度:', dataURL.length);
       if (dataURL && dataURL !== 'data:,') {
         showImageForSave(dataURL, name);
         showToast('长按图片保存到相册');
         return;
+      } else {
+        console.error('dataURL为空');
       }
-    } catch(e) {}
+    } catch(e) {
+      console.error('生成dataURL失败:', e);
+    }
   }
 
   // PC端：使用传统下载方式
   try {
     const dataURL = canvas.toDataURL('image/png');
     if (dataURL && dataURL !== 'data:,') {
+      console.log('PC端下载方式1: dataURL');
       const link = document.createElement('a');
       link.download = `网球DNA_${name}.png`;
       link.href = dataURL;
@@ -808,11 +823,15 @@ function downloadCanvas(canvas, name) {
       showToast('海报已保存！快去分享吧 🎾');
       return;
     }
-  } catch(e1) {}
+  } catch(e1) {
+    console.error('PC端下载方式1失败:', e1);
+  }
 
   try {
+    console.log('PC端下载方式2: blob');
     canvas.toBlob((blob) => {
       if (blob) {
+        console.log('blob生成成功，大小:', blob.size);
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.download = `网球DNA_${name}.png`;
@@ -826,10 +845,12 @@ function downloadCanvas(canvas, name) {
         }, 500);
         showToast('海报已保存！快去分享吧 🎾');
       } else {
+        console.error('blob为空');
         showToast('保存失败，请截屏保存 📸');
       }
     }, 'image/png');
   } catch(e2) {
+    console.error('PC端下载方式2失败:', e2);
     showToast('请截屏保存后分享 📸');
   }
 }

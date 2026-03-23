@@ -344,7 +344,7 @@ function renderResult() {
     </div>
 
     <!-- 操作按钮 -->
-    <div class="px-5 pt-4 pb-20 space-y-3 result-section" style="animation-delay:0.65s">
+    <div class="px-5 pt-4 space-y-3 result-section" style="animation-delay:0.65s">
       <button id="btn-share" class="share-btn w-full bg-gradient-to-r from-tennis-green to-green-400 text-tennis-dark">
         <i class="ri-share-forward-fill"></i> 分享我的网球DNA
       </button>
@@ -352,6 +352,11 @@ function renderResult() {
         <i class="ri-refresh-line"></i> 重新测试
       </button>
     </div>
+
+    <!-- 页脚 -->
+    <footer class="px-5 py-6 text-center result-section" style="animation-delay:0.75s">
+      <p class="text-xs text-gray-500">© 一起趣玩</p>
+    </footer>
   `;
 
   // 初始化雷达图
