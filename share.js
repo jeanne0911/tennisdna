@@ -60,21 +60,21 @@ export function showShareModal(result, mainType, subType, typeScores) {
       <!-- ① 顶部品牌 + 类型标题 -->
       <div style="padding:18px 22px 14px;display:flex;align-items:center;justify-content:space-between;">
         <div style="display:flex;align-items:center;gap:6px;">
-          <span style="font-size:18px;">🎾</span>
-          <span style="color:#c8e64c;font-size:14px;font-weight:800;letter-spacing:0.5px;">Tennis DNA Test</span>
+          <span style="font-size:20px;">🎾</span>
+          <span style="color:#c8e64c;font-size:16px;font-weight:800;letter-spacing:0.5px;">Tennis DNA Test</span>
         </div>
         <div style="
           display:inline-flex;align-items:center;gap:4px;
           padding:4px 12px;border-radius:20px;
           background:rgba(200,230,76,0.1);border:1px solid rgba(200,230,76,0.2);
-          color:#c8e64c;font-size:11px;font-weight:700;
+          color:#c8e64c;font-size:13px;font-weight:700;
         ">🧬 我的网球DNA</div>
       </div>
 
       <!-- ② 类型名称 -->
       <div style="padding:0 22px 16px;text-align:center;">
         <div style="
-          font-size:36px;font-weight:900;
+          font-size:40px;font-weight:900;
           color:${result.color};
           text-shadow:0 0 24px ${result.color}55;
           line-height:1.2;
@@ -87,7 +87,7 @@ export function showShareModal(result, mainType, subType, typeScores) {
       <!-- ③ 主内容区：能力雷达标题在框外，关键特征+雷达图在同一个框内（与结果页一致） -->
       <div style="padding:0 22px 12px;">
         <!-- 标题行：能力雷达在框外左侧 -->
-        <div style="color:#6b7280;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">
+        <div style="color:#6b7280;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">
           📊 能力雷达
         </div>
         <!-- 同一个卡片框：左关键特征 + 右雷达图 -->
@@ -95,11 +95,11 @@ export function showShareModal(result, mainType, subType, typeScores) {
           <div style="display:flex;align-items:stretch;">
             <!-- 左：关键特征（含标题） -->
             <div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:9px;padding:12px 14px;border-right:1px solid rgba(255,255,255,0.05);">
-              <div style="color:#6b7280;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;">🏷️ 关键特征</div>
+              <div style="color:#6b7280;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;">🏷️ 关键特征</div>
               ${result.traits.map(trait => `
                 <div style="display:flex;align-items:center;gap:8px;">
                   <span style="width:6px;height:6px;border-radius:50%;background:${result.color};flex-shrink:0;display:inline-block;"></span>
-                  <span style="color:#e5e7eb;font-size:14px;font-weight:500;">${trait}</span>
+                  <span style="color:#e5e7eb;font-size:16px;font-weight:500;">${trait}</span>
                 </div>
               `).join('')}
             </div>
@@ -116,7 +116,7 @@ export function showShareModal(result, mainType, subType, typeScores) {
 
       <!-- ④ 代表球星 -->
       <div style="padding:12px 22px 10px;">
-        <div style="color:#6b7280;font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:8px;text-transform:uppercase;">⭐ 代表球星</div>
+        <div style="color:#6b7280;font-size:13px;font-weight:700;letter-spacing:1px;margin-bottom:8px;text-transform:uppercase;">⭐ 代表球星</div>
         <div style="
           display:flex;align-items:center;gap:10px;
           padding:10px 12px;border-radius:12px;
@@ -127,8 +127,8 @@ export function showShareModal(result, mainType, subType, typeScores) {
             <img src="${result.starPhoto}" alt="${result.star}" style="width:100%;height:100%;object-fit:cover;object-position:top center;" onerror="this.style.display='none';">
           </div>
           <div style="flex:1;min-width:0;">
-            <div style="color:#fff;font-size:14px;font-weight:700;margin-bottom:3px;">${result.star}</div>
-            <div style="color:#9ca3af;font-size:12px;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${result.starDesc}</div>
+            <div style="color:#fff;font-size:16px;font-weight:700;margin-bottom:3px;">${result.star}</div>
+            <div style="color:#9ca3af;font-size:14px;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${result.starDesc}</div>
           </div>
         </div>
       </div>
@@ -138,7 +138,7 @@ export function showShareModal(result, mainType, subType, typeScores) {
 
       <!-- ⑤ 搭子匹配（三个） -->
       <div style="padding:12px 22px 12px;">
-        <div style="color:#6b7280;font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:9px;text-transform:uppercase;">💥 搭子匹配</div>
+        <div style="color:#6b7280;font-size:13px;font-weight:700;letter-spacing:1px;margin-bottom:9px;text-transform:uppercase;">💥 搭子匹配</div>
         <!-- 最佳搭档 -->
         <div style="
           display:flex;align-items:center;gap:10px;
@@ -148,15 +148,15 @@ export function showShareModal(result, mainType, subType, typeScores) {
           margin-bottom:7px;
           position:relative;
         ">
-          <div style="position:absolute;top:5px;right:8px;font-size:10px;color:#c8e64c;font-weight:700;">⭐ 最佳</div>
+          <div style="position:absolute;top:5px;right:8px;font-size:11px;color:#c8e64c;font-weight:700;">⭐ 最佳</div>
           <div style="
             width:36px;height:36px;border-radius:10px;flex-shrink:0;
             background:${bestMatchType.color}15;border:1px solid ${bestMatchType.color}44;
             display:flex;align-items:center;justify-content:center;font-size:20px;
           ">${bestMatchType.emoji}</div>
           <div style="flex:1;min-width:0;">
-            <div style="font-size:14px;font-weight:800;color:${bestMatchType.color};">${bestMatchType.name}</div>
-            <div style="color:#d1d5db;font-size:12px;font-weight:600;">${match.best.matchEmoji} 「${match.best.matchName}」</div>
+            <div style="font-size:16px;font-weight:800;color:${bestMatchType.color};">${bestMatchType.name}</div>
+            <div style="color:#d1d5db;font-size:14px;font-weight:600;">${match.best.matchEmoji} 「${match.best.matchName}」</div>
           </div>
         </div>
         <!-- 其他两个搭子 -->
@@ -176,8 +176,8 @@ export function showShareModal(result, mainType, subType, typeScores) {
                 display:flex;align-items:center;justify-content:center;font-size:20px;
               ">${otherType.emoji}</div>
               <div style="flex:1;min-width:0;">
-                <div style="font-size:14px;font-weight:700;color:${otherType.color};">${otherType.name}</div>
-                <div style="color:#9ca3af;font-size:12px;">${other.matchEmoji} 「${other.matchName}」</div>
+                <div style="font-size:16px;font-weight:700;color:${otherType.color};">${otherType.name}</div>
+                <div style="color:#9ca3af;font-size:14px;">${other.matchEmoji} 「${other.matchName}」</div>
               </div>
             </div>
           `;
@@ -190,18 +190,18 @@ export function showShareModal(result, mainType, subType, typeScores) {
       <!-- ⑥ 底部：左侧扫码提示+社交媒体 + 右侧二维码（上边缘对齐） -->
       <div style="padding:8px 22px 6px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
         <div style="flex:1;">
-          <div style="color:#c8e64c;font-size:14px;font-weight:700;margin-bottom:8px;">🎾 扫码测测你的网球DNA</div>
-          <div style="color:#9ca3af;font-size:11px;margin-bottom:6px;">更多有趣活动，请关注</div>
+          <div style="color:#c8e64c;font-size:16px;font-weight:700;margin-bottom:8px;">🎾 扫码测测你的网球DNA</div>
+          <div style="color:#9ca3af;font-size:13px;margin-bottom:6px;">更多有趣活动，请关注</div>
           <div style="display:flex;align-items:center;gap:5px;margin-bottom:5px;">
             <img src="/static/red.png" style="width:16px;height:16px;border-radius:3px;flex-shrink:0;" alt="小红书">
-            <span style="color:#e5e7eb;font-size:12px;font-weight:600;">小红书：一起趣玩</span>
+            <span style="color:#e5e7eb;font-size:14px;font-weight:600;">小红书：一起趣玩</span>
           </div>
           <div style="display:flex;align-items:center;gap:5px;">
             <svg viewBox="0 0 24 24" width="16" height="16" style="flex-shrink:0;">
               <circle cx="12" cy="12" r="11" fill="#000000" stroke="#ffffff" stroke-width="1.5"/>
               <text x="12" y="12" text-anchor="middle" dominant-baseline="central" fill="#ffffff" font-size="12" font-weight="bold">@</text>
             </svg>
-            <span style="color:#e5e7eb;font-size:12px;font-weight:600;">Threads：fun.go_official</span>
+            <span style="color:#e5e7eb;font-size:14px;font-weight:600;">Threads：fun.go_official</span>
           </div>
         </div>
         <div style="flex-shrink:0;text-align:center;">
@@ -220,7 +220,7 @@ export function showShareModal(result, mainType, subType, typeScores) {
 
       <!-- ⑦ 页脚：©️一起趣玩 放到最底部 -->
       <div style="padding:12px 22px 16px;text-align:center;">
-        <div style="color:#c8e64c;font-size:13px;font-weight:800;">©️ 一起趣玩</div>
+        <div style="color:#c8e64c;font-size:15px;font-weight:800;">©️ 一起趣玩</div>
       </div>
     </div>
 
@@ -245,7 +245,7 @@ export function showShareModal(result, mainType, subType, typeScores) {
         color:#6b7280;font-size:13px;
         -webkit-tap-highlight-color:transparent;
       ">关闭</button>
-      <p style="text-align:center;font-size:12px;font-weight:700;color:#c8e64c;margin-top:4px;">©️ 一起趣玩</p>
+      <p style="text-align:center;font-size:14px;font-weight:700;color:#c8e64c;margin-top:4px;">©️ 一起趣玩</p>
     </div>
   `;
 
@@ -393,7 +393,7 @@ function drawShareRadar(canvas, result) {
   }
 
   ctx.fillStyle = '#9ca3af';
-  ctx.font = '10px sans-serif';
+  ctx.font = '12px sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   for (let i = 0; i < n; i++) {
@@ -437,13 +437,13 @@ export function generateShareCard(result, mainType, subType, typeScores) {
   // ---- 品牌标识 ----
   const emojiFont = '"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Segoe UI Symbol"';
   ctx.fillStyle = '#c8e64c';
-  ctx.font = `bold 26px ${emojiFont},sans-serif`;
+  ctx.font = `bold 30px ${emojiFont},sans-serif`;
   ctx.textAlign = 'left';
   ctx.fillText('🎾 Tennis DNA Test', 56, 64);
 
   // ---- 类型名称 ----
   ctx.fillStyle = result.color;
-  ctx.font = `bold 58px ${emojiFont},sans-serif`;
+  ctx.font = `bold 68px ${emojiFont},sans-serif`;
   ctx.textAlign = 'center';
   ctx.shadowColor = result.color;
   ctx.shadowBlur = 28;
@@ -477,7 +477,7 @@ export function generateShareCard(result, mainType, subType, typeScores) {
   ctx.stroke();
 
   ctx.fillStyle = '#6b7280';
-  ctx.font = `bold 17px ${emojiFont},sans-serif`;
+  ctx.font = `bold 20px ${emojiFont},sans-serif`;
   ctx.textAlign = 'left';
   ctx.fillText('🏷️ 关键特征', 72, sectionY + 30);
 
@@ -489,13 +489,13 @@ export function generateShareCard(result, mainType, subType, typeScores) {
     ctx.fillStyle = result.color;
     ctx.fill();
     ctx.fillStyle = '#e5e7eb';
-    ctx.font = '19px sans-serif';
+    ctx.font = '22px sans-serif';
     ctx.textAlign = 'left';
     ctx.fillText(trait, 96, ty);
   });
 
   ctx.fillStyle = '#6b7280';
-  ctx.font = `bold 17px ${emojiFont},sans-serif`;
+  ctx.font = `bold 20px ${emojiFont},sans-serif`;
   ctx.textAlign = 'left';
   ctx.fillText('📊 能力雷达', radarBoxX, sectionY + 30);
 
@@ -508,7 +508,7 @@ export function generateShareCard(result, mainType, subType, typeScores) {
   // ---- 代表球星 ----
   const starY = sectionY + radarSize + 50;
   ctx.fillStyle = '#6b7280';
-  ctx.font = `bold 17px ${emojiFont},sans-serif`;
+  ctx.font = `bold 20px ${emojiFont},sans-serif`;
   ctx.textAlign = 'left';
   ctx.fillText('⭐ 代表球星', 56, starY);
 
@@ -525,19 +525,19 @@ export function generateShareCard(result, mainType, subType, typeScores) {
   const starImgY = starY + 28;
 
   ctx.fillStyle = '#ffffff';
-  ctx.font = 'bold 21px sans-serif';
+  ctx.font = 'bold 24px sans-serif';
   ctx.textAlign = 'left';
   ctx.fillText(result.star, starImgX + starImgSize + 14, starY + 52);
   ctx.fillStyle = '#9ca3af';
-  ctx.font = '15px sans-serif';
-  wrapText(ctx, result.starDesc, starImgX + starImgSize + 14, starY + 74, W - 200, 19);
+  ctx.font = '18px sans-serif';
+  wrapText(ctx, result.starDesc, starImgX + starImgSize + 14, starY + 74, W - 200, 22);
 
   drawDivider(starY + 116);
 
   // ---- 搭子匹配 ----
   const matchY = starY + 134;
   ctx.fillStyle = '#6b7280';
-  ctx.font = `bold 17px ${emojiFont},sans-serif`;
+  ctx.font = `bold 20px ${emojiFont},sans-serif`;
   ctx.textAlign = 'left';
   ctx.fillText('💥 搭子匹配', 56, matchY);
 
@@ -553,7 +553,7 @@ export function generateShareCard(result, mainType, subType, typeScores) {
   ctx.stroke();
 
   ctx.fillStyle = '#c8e64c';
-  ctx.font = `bold 14px ${emojiFont},sans-serif`;
+  ctx.font = `bold 16px ${emojiFont},sans-serif`;
   ctx.textAlign = 'right';
   ctx.fillText('⭐ 最佳', W - 70, matchY + 32);
 
@@ -572,11 +572,11 @@ export function generateShareCard(result, mainType, subType, typeScores) {
   ctx.textBaseline = 'alphabetic';
 
   ctx.fillStyle = bestMatchType.color;
-  ctx.font = 'bold 21px sans-serif';
+  ctx.font = 'bold 24px sans-serif';
   ctx.textAlign = 'left';
   ctx.fillText(bestMatchType.name, 130, matchY + 42);
   ctx.fillStyle = '#d1d5db';
-  ctx.font = `bold 16px ${emojiFont},sans-serif`;
+  ctx.font = `bold 18px ${emojiFont},sans-serif`;
   ctx.fillText(`${match.best.matchEmoji} 「${match.best.matchName}」`, 130, matchY + 64);
 
   match.others.forEach((other, i) => {
@@ -606,7 +606,7 @@ export function generateShareCard(result, mainType, subType, typeScores) {
     ctx.textBaseline = 'alphabetic';
 
     ctx.fillStyle = otherType.color;
-    ctx.font = 'bold 19px sans-serif';
+    ctx.font = 'bold 22px sans-serif';
     ctx.textAlign = 'left';
     ctx.fillText(otherType.name, 130, oy + 32);
     ctx.fillStyle = '#9ca3af';
@@ -629,20 +629,20 @@ export function generateShareCard(result, mainType, subType, typeScores) {
 
   // "扫码测测你的网球DNA" 左对齐，与二维码上边缘对齐
   ctx.fillStyle = '#c8e64c';
-  ctx.font = `bold 20px ${emojiFont},sans-serif`;
+  ctx.font = `bold 24px ${emojiFont},sans-serif`;
   ctx.textAlign = 'left';
   ctx.fillText('🎾 扫码测测你的网球DNA', 56, bottomY + 22);
 
   // "更多有趣活动，请关注"
   ctx.fillStyle = '#9ca3af';
-  ctx.font = '16px sans-serif';
+  ctx.font = '19px sans-serif';
   ctx.textAlign = 'left';
   ctx.fillText('更多有趣活动，请关注', 56, bottomY + 54);
 
   // 小红书
   const xhsLogoY = bottomY + 78;
   ctx.fillStyle = '#e5e7eb';
-  ctx.font = 'bold 18px sans-serif';
+  ctx.font = 'bold 20px sans-serif';
   ctx.textAlign = 'left';
   ctx.fillText('小红书：一起趣玩', 56 + 28, xhsLogoY + 5);
 
@@ -672,7 +672,7 @@ export function generateShareCard(result, mainType, subType, typeScores) {
 
   // "©️ 一起趣玩" 放在最底部
   ctx.fillStyle = '#c8e64c';
-  ctx.font = 'bold 22px sans-serif';
+  ctx.font = 'bold 26px sans-serif';
   ctx.textAlign = 'center';
   ctx.fillText('©️ 一起趣玩', W / 2, bottomY + 174);
 
@@ -1006,7 +1006,7 @@ function drawCanvasRadar(ctx, result, cx, cy, R) {
   }
 
   ctx.fillStyle = '#9ca3af';
-  ctx.font = '17px sans-serif';
+  ctx.font = '20px sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   for (let i = 0; i < n; i++) {
