@@ -359,7 +359,10 @@ function renderResult() {
 
   // 绑定事件
   document.getElementById('btn-share').addEventListener('click', () => {
-    showShareModal(state.result, state.mainType, state.subType, state.typeScores);
+    showToast('正在生成海报...');
+    setTimeout(() => {
+      generateShareCard(state.result, state.mainType, state.subType, state.typeScores);
+    }, 100);
   });
 
   document.getElementById('btn-retry').addEventListener('click', () => {
