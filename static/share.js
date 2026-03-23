@@ -393,7 +393,7 @@ function drawShareRadar(canvas, result) {
   }
 
   ctx.fillStyle = '#9ca3af';
-  ctx.font = '10px sans-serif';
+  ctx.font = '12px sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   for (let i = 0; i < n; i++) {
@@ -442,7 +442,7 @@ export function generateShareCard(result, mainType, subType, typeScores) {
 
   // ---- 类型名称 ----
   ctx.fillStyle = result.color;
-  ctx.font = `bold 58px ${emojiFont},sans-serif`;
+  ctx.font = `bold 68px ${emojiFont},sans-serif`;
   ctx.textAlign = 'center';
   ctx.shadowColor = result.color;
   ctx.shadowBlur = 28;
@@ -476,7 +476,7 @@ export function generateShareCard(result, mainType, subType, typeScores) {
   ctx.stroke();
 
   ctx.fillStyle = '#6b7280';
-  ctx.font = `bold 17px ${emojiFont},sans-serif`;
+  ctx.font = `bold 20px ${emojiFont},sans-serif`;
   ctx.textAlign = 'left';
   ctx.fillText('🏷️ 关键特征', 72, sectionY + 30);
 
@@ -487,14 +487,14 @@ export function generateShareCard(result, mainType, subType, typeScores) {
     ctx.arc(80, ty - 5, 5, 0, Math.PI * 2);
     ctx.fillStyle = result.color;
     ctx.fill();
-    ctx.fillStyle = '#e5e7eb';
-    ctx.font = '19px sans-serif';
-    ctx.textAlign = 'left';
-    ctx.fillText(trait, 96, ty);
+  ctx.fillStyle = '#e5e7eb';
+  ctx.font = '22px sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText(trait, 96, ty);
   });
 
   ctx.fillStyle = '#6b7280';
-  ctx.font = `bold 17px ${emojiFont},sans-serif`;
+  ctx.font = `bold 20px ${emojiFont},sans-serif`;
   ctx.textAlign = 'left';
   ctx.fillText('📊 能力雷达', radarBoxX, sectionY + 30);
 
@@ -507,7 +507,7 @@ export function generateShareCard(result, mainType, subType, typeScores) {
   // ---- 代表球星 ----
   const starY = sectionY + radarSize + 50;
   ctx.fillStyle = '#6b7280';
-  ctx.font = `bold 17px ${emojiFont},sans-serif`;
+  ctx.font = `bold 20px ${emojiFont},sans-serif`;
   ctx.textAlign = 'left';
   ctx.fillText('⭐ 代表球星', 56, starY);
 
@@ -571,11 +571,11 @@ export function generateShareCard(result, mainType, subType, typeScores) {
   ctx.textBaseline = 'alphabetic';
 
   ctx.fillStyle = bestMatchType.color;
-  ctx.font = 'bold 21px sans-serif';
+  ctx.font = 'bold 24px sans-serif';
   ctx.textAlign = 'left';
   ctx.fillText(bestMatchType.name, 130, matchY + 42);
   ctx.fillStyle = '#d1d5db';
-  ctx.font = `bold 16px ${emojiFont},sans-serif`;
+  ctx.font = `bold 18px ${emojiFont},sans-serif`;
   ctx.fillText(`${match.best.matchEmoji} 「${match.best.matchName}」`, 130, matchY + 64);
 
   match.others.forEach((other, i) => {
@@ -605,11 +605,11 @@ export function generateShareCard(result, mainType, subType, typeScores) {
     ctx.textBaseline = 'alphabetic';
 
     ctx.fillStyle = otherType.color;
-    ctx.font = 'bold 19px sans-serif';
+    ctx.font = 'bold 22px sans-serif';
     ctx.textAlign = 'left';
     ctx.fillText(otherType.name, 130, oy + 32);
     ctx.fillStyle = '#9ca3af';
-    ctx.font = `15px ${emojiFont},sans-serif`;
+    ctx.font = `17px ${emojiFont},sans-serif`;
     ctx.fillText(`${other.matchEmoji} 「${other.matchName}」`, 130, oy + 54);
   });
 
@@ -628,20 +628,20 @@ export function generateShareCard(result, mainType, subType, typeScores) {
 
   // "扫码测测你的网球DNA" 左对齐，与二维码上边缘对齐
   ctx.fillStyle = '#c8e64c';
-  ctx.font = `bold 20px ${emojiFont},sans-serif`;
+  ctx.font = `bold 24px ${emojiFont},sans-serif`;
   ctx.textAlign = 'left';
   ctx.fillText('🎾 扫码测测你的网球DNA', 56, bottomY + 22);
 
   // "更多有趣活动，请关注"
   ctx.fillStyle = '#9ca3af';
-  ctx.font = '16px sans-serif';
+  ctx.font = '18px sans-serif';
   ctx.textAlign = 'left';
   ctx.fillText('更多有趣活动，请关注', 56, bottomY + 54);
 
   // 小红书
   const xhsLogoY = bottomY + 78;
   ctx.fillStyle = '#e5e7eb';
-  ctx.font = 'bold 18px sans-serif';
+  ctx.font = 'bold 20px sans-serif';
   ctx.textAlign = 'left';
   ctx.fillText('小红书：一起趣玩', 56 + 28, xhsLogoY + 5);
 
