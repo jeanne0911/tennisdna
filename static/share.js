@@ -778,6 +778,23 @@ export function generateShareCard(result, mainType, subType, typeScores) {
 }
 
 function downloadCanvas(canvas, name) {
+  // 判断是否在移动端（特别是微信）
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const isWeChat = /MicroMessenger/i.test(navigator.userAgent);
+
+  if (isMobile || isWeChat) {
+    // 移动端/微信：显示图片供长按保存
+    try {
+      const dataURL = canvas.toDataURL('image/png');
+      if (dataURL && dataURL !== 'data:,') {
+        showImageForSave(dataURL, name);
+        showToast('长按图片保存到相册');
+        return;
+      }
+    } catch(e) {}
+  }
+
+  // PC端：使用传统下载方式
   try {
     const dataURL = canvas.toDataURL('image/png');
     if (dataURL && dataURL !== 'data:,') {
@@ -814,6 +831,93 @@ function downloadCanvas(canvas, name) {
     }, 'image/png');
   } catch(e2) {
     showToast('请截屏保存后分享 📸');
+  }
+}
+
+/**
+ * 显示图片供长按保存（移动端/微信）
+ */
+function showImageForSave(dataURL, name) {
+  // 检查是否已有图片弹窗，有则移除
+  const existing = document.getElementById('image-save-modal');
+  if (existing) {
+    document.body.removeChild(existing);
+  }
+
+  const modal = document.createElement('div');
+  modal.id = 'image-save-modal';
+  modal.style.cssText = `
+    position:fixed;
+    inset:0;
+    z-index:10000;
+    background:rgba(0,0,0,0.95);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    animation: fadeIn 0.3s ease;
+  `;
+
+  const img = document.createElement('img');
+  img.src = dataURL;
+  img.style.cssText = `
+    max-width:100%;
+    max-height:80vh;
+    border-radius:12px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.5);
+  `;
+
+  const tip = document.createElement('div');
+  tip.style.cssText = `
+    color:#fff;
+    margin-top:20px;
+    font-size:16px;
+    font-weight:600;
+    text-align:center;
+  `;
+  tip.innerHTML = '📱 长按图片保存到相册';
+
+  const closeBtn = document.createElement('button');
+  closeBtn.textContent = '✕';
+  closeBtn.style.cssText = `
+    position:absolute;
+    top:20px;
+    right:20px;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.15);
+    border:none;
+    color:#fff;
+    font-size:20px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  `;
+
+  closeBtn.onclick = () => {
+    modal.style.opacity = '0';
+    setTimeout(() => document.body.removeChild(modal), 300);
+  };
+
+  modal.appendChild(closeBtn);
+  modal.appendChild(img);
+  modal.appendChild(tip);
+  document.body.appendChild(modal);
+
+  // 添加动画样式
+  if (!document.getElementById('image-save-style')) {
+    const style = document.createElement('style');
+    style.id = 'image-save-style';
+    style.textContent = `
+      @keyframes fadeIn {
+        from { opacity:0; }
+        to { opacity:1; }
+      }
+    `;
+    document.head.appendChild(style);
   }
 }
 
